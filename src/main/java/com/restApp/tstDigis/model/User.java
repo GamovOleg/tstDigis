@@ -3,29 +3,25 @@ package com.restApp.tstDigis.model;
 import com.restApp.tstDigis.Gender;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "users", uniqueConstraints = {@UniqueConstraint(columnNames = {"login"})})
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-//    @Column(name = "login")
     private String login;
-//    @Column(name = "fullName")
     private String fullName;
-//    @Column(name = "dateOfBirth")
-    private String dateOfBirth;   //need to change to the date of the calendar
-//    @Column(name = "gender")
+    private Date dateOfBirth;
     @Enumerated(EnumType.STRING)
-    private
-    Gender gender;
+    private Gender gender;
 
     public User() {
     }
 
-    public User(Long id, String login, String fullName, String dateOfBirth, Gender gender) {
+    public User(Long id, String login, String fullName, Date dateOfBirth, Gender gender) {
         this.id = id;
         this.login = login;
         this.fullName = fullName;
@@ -53,15 +49,15 @@ public class User {
         return fullName;
     }
 
-    public void setFullName(String full_name) {
+    public void setFullName(String fullName) {
         this.fullName = fullName;
     }
 
-    public String getDateOfBirth() {
+    public Date getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(String dateOfBirth) {
+    public void setDateOfBirth(Date dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 

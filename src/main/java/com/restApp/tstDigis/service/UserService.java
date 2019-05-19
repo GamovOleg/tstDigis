@@ -56,7 +56,7 @@ public class UserService {
         if (user.getFullName() == null || user.getFullName().isEmpty()) {
             return inDb;
         }
-        if (user.getDateOfBirth() == null || user.getDateOfBirth().isEmpty()) {
+        if (user.getDateOfBirth() == null) {
             return inDb;
         }
         if (user.getGender() == null) {
@@ -77,7 +77,7 @@ public class UserService {
         if (user.getLogin() == null || user.getLogin().isEmpty()) {
             throw new UserInvalidException();
         }
-        if (user.getDateOfBirth() == null || user.getDateOfBirth().isEmpty()) {
+        if (user.getDateOfBirth() == null) {
             throw new UserInvalidException();
         }
         if (user.getGender() == null) {

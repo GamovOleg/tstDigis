@@ -74,8 +74,8 @@ public class User {
         return "User{" +
                 "id=" + id +
                 ", login='" + login + '\'' +
-                ", full_name='" + fullName + '\'' +
-                ", date_of_birth='" + dateOfBirth + '\'' +
+                ", fullName='" + fullName + '\'' +
+                ", dateOfBirth='" + dateOfBirth + '\'' +
                 ", gender=" + gender +
                 '}';
     }

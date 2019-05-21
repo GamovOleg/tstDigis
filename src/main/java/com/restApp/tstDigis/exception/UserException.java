@@ -7,15 +7,11 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 public class UserException extends RuntimeException {
 
     public UserException() {
-        super();
+        this("Something happened");
     }
 
     public UserException(String message) {
         super(message);
-    }
-
-    public UserException(String message, Throwable cause) {
-        super(message, cause);
     }
 
 }

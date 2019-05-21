@@ -7,24 +7,49 @@ import com.restApp.tstDigis.exception.UserNotFoundException;
 import com.restApp.tstDigis.model.User;
 import com.restApp.tstDigis.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@ComponentScan
 public class UserService {
 
     @Autowired
-    private UserRepository repository;
+    private UserRepository userRepository;
 
-    //GET
+
+    public User getUser(Long id){
+        User result = userRepository.getOne(id);
+        if(result == null)
+            throw  new UserNotFoundException();
+        return result;
+    }
+
+    public User updateUser(Long id, User user) {
+        User updatedUser = userRepository.getOne(id);
+        if(updatedUser == null)
+            throw new UserNotFoundException();
+        updatedUser.setLogin(user.getLogin());
+        updatedUser.setFullName(user.getFullName());
+        updatedUser.setDateOfBirth(user.getDateOfBirth());
+        updatedUser.setGender(user.getGender());
+        return userRepository.save(updatedUser);
+    }
+
+    public User saveUser(User user){
+        return userRepository.save(user);
+    }
+
+/*    //GET
 
     public List<User> getAllUsers() {
-        return repository.findAll();
+        return userRepository.findAll();
     }
 
     public User getUserById(Long id) throws UserException {
-        User user = repository.getOne(id);
+        User user = userRepository.getOne(id);
         if (user == null) {
             throw new UserNotFoundException();
         }
@@ -32,43 +57,33 @@ public class UserService {
     }
 
     public User findByLogin(String login) throws UserNotFoundException {
-        return repository.findByLogin(login);
+        return userRepository.findByLogin(login);
     }
 
     public User findByFullName(String fullName) throws UserNotFoundException {
-        return repository.findByFullName(fullName);
+        return userRepository.findByFullName(fullName);
     }
 
     public User findByGender(String gender) {
-        return repository.findByGender(gender);
+        return userRepository.findByGender(gender);
     }
 
     //PUT
 
-    public User update(User user) throws UserException {
-        User inDb = repository.getOne(user.getId());
-        if (inDb == null) {
+    public User update(Long id, User user) throws UserException {
+        User updatedUser = userRepository.getOne(id);
+        if (updatedUser == null)
             throw new UserNotFoundException();
-        }
-        if (user.getLogin() == null || user.getLogin().isEmpty()) {
-            return inDb;
-        }
-        if (user.getFullName() == null || user.getFullName().isEmpty()) {
-            return inDb;
-        }
-        if (user.getDateOfBirth() == null) {
-            return inDb;
-        }
-        if (user.getGender() == null) {
-            return inDb;
-        }
-        return repository.save(user);
+        updatedUser.setLogin(user.getLogin());
+        updatedUser.setFullName(user.getFullName());
+
+        return userRepository.save(updatedUser);
     }
 
     //POST
 
     public User create(User user) throws UserException {
-        if (repository.getOne(user.getId()) != null) {
+        if (userRepository.getOne(user.getId()) != null) {
             throw new UserAlreadyExistsException();
         }
         if (user.getFullName() == null || user.getFullName().isEmpty()) {
@@ -83,7 +98,6 @@ public class UserService {
         if (user.getGender() == null) {
             throw new UserInvalidException();
         }
-        return repository.save(user);
-    }
-
+        return userRepository.save(user);
+    }   */
 }

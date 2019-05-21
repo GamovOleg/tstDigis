@@ -1,9 +1,12 @@
 package com.restApp.tstDigis.model;
 
 import com.restApp.tstDigis.Gender;
+import com.restApp.tstDigis.exception.UserInvalidException;
 
 import javax.persistence.*;
-import java.util.Date;
+
+import static com.restApp.tstDigis.Gender.FEMALE;
+import static com.restApp.tstDigis.Gender.MALE;
 
 @Entity
 @Table(name = "users", uniqueConstraints = {@UniqueConstraint(columnNames = {"login"})})
@@ -14,14 +17,17 @@ public class User {
     private Long id;
     private String login;
     private String fullName;
-    private Date dateOfBirth;
+    private String dateOfBirth;
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
     public User() {
     }
 
-    public User(Long id, String login, String fullName, Date dateOfBirth, Gender gender) {
+    public User(Long id, String fullName) {
+    }
+
+    public User(Long id, String login, String fullName, String dateOfBirth, Gender gender) {
         this.id = id;
         this.login = login;
         this.fullName = fullName;
@@ -31,10 +37,6 @@ public class User {
 
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getLogin() {
@@ -53,11 +55,11 @@ public class User {
         this.fullName = fullName;
     }
 
-    public Date getDateOfBirth() {
+    public String getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(Date dateOfBirth) {
+    public void setDateOfBirth(String dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
@@ -69,7 +71,13 @@ public class User {
         this.gender = gender;
     }
 
-    @Override
+/*    public void checkUserFields() throws UserInvalidException {
+        if ((login == null || login.isEmpty()) || (fullName == null || fullName.isEmpty()) || (dateOfBirth == null || dateOfBirth.isEmpty())) {
+            throw new UserInvalidException();
+        }
+    }*/
+
+/*    @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
@@ -78,5 +86,5 @@ public class User {
                 ", dateOfBirth='" + dateOfBirth + '\'' +
                 ", gender=" + gender +
                 '}';
-    }
+    }*/
 }

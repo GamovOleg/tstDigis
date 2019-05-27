@@ -1,8 +1,6 @@
 package com.restApp.tstDigis.service;
 
-import com.restApp.tstDigis.exception.UserAlreadyExistsException;
-import com.restApp.tstDigis.exception.UserException;
-import com.restApp.tstDigis.exception.UserInvalidException;
+import com.restApp.tstDigis.Gender;
 import com.restApp.tstDigis.exception.UserNotFoundException;
 import com.restApp.tstDigis.model.User;
 import com.restApp.tstDigis.repository.UserRepository;
@@ -19,6 +17,9 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
+    public List<User> findAllUsers(){
+        return userRepository.findAll();
+    }
 
     public User getUser(Long id){
         User result = userRepository.getOne(id);

@@ -3,6 +3,7 @@ package com.restApp.tstDigis.controller;
 import com.restApp.tstDigis.model.User;
 import com.restApp.tstDigis.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -10,24 +11,31 @@ import java.util.List;
 @RestController
 public class UserController {
 
+
     @Autowired
     private UserService userService;
 
 
-    @GetMapping("GET/user/{id}")
+    @GetMapping("/users")
+    public List<User> findAllUsers() {
+        return userService.findAllUsers();
+    }
+
+    @GetMapping("/user{id}")
     public User getUser(@PathVariable Long id) {
         return userService.getUser(id);
     }
 
-    @PutMapping("PUT/user/{id}")
+    @PutMapping("/update/user{id}")
     public User updateUser(@PathVariable Long id, @RequestBody User user) {
         return userService.updateUser(id, user);
     }
 
-    @PostMapping("POST/user")
+    @PostMapping("/adduser")
     public User saveUser(@RequestBody User user) {
         return userService.saveUser(user);
     }
+
 
 /*      // Sandbox _Detailed requests_
 

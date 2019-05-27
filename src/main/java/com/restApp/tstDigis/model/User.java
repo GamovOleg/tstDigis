@@ -9,10 +9,11 @@ import static com.restApp.tstDigis.Gender.FEMALE;
 import static com.restApp.tstDigis.Gender.MALE;
 
 @Entity
-@Table(name = "users", uniqueConstraints = {@UniqueConstraint(columnNames = {"login"})})
+@Table(name = "USERS", uniqueConstraints = {@UniqueConstraint(columnNames = {"login"})})
 public class User {
 
     @Id
+
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String login;
@@ -22,9 +23,6 @@ public class User {
     private Gender gender;
 
     public User() {
-    }
-
-    public User(Long id, String fullName) {
     }
 
     public User(Long id, String login, String fullName, String dateOfBirth, Gender gender) {
@@ -71,7 +69,7 @@ public class User {
         this.gender = gender;
     }
 
-/*    public void checkUserFields() throws UserInvalidException {
+    /*    public void checkUserFields() throws UserInvalidException {
         if ((login == null || login.isEmpty()) || (fullName == null || fullName.isEmpty()) || (dateOfBirth == null || dateOfBirth.isEmpty())) {
             throw new UserInvalidException();
         }
